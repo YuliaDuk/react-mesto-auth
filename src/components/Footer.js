@@ -1,8 +1,9 @@
-function Footer (){
-    return (
-        <footer className="footer">
-            <p className="footer__text">&copy; 2023 Mesto Russia</p>
-        </footer>
-    )
+function Footer() {
+  const year = new Date().getFullYear();
+  return (
+    <footer className="footer">
+      <p className="footer__text">&copy; {year} Mesto Russia</p>
+    </footer>
+  );
 }
-export default Footer
+export default Footer;
