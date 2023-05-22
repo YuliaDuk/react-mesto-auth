@@ -119,16 +119,20 @@ function App() {
       .catch((err) => console.log(err));
   }
   function handleUpdateUser(data) {
+    setIsLoading(true);
     api
       .redProfile(data)
       .then((res) => {
-        setIsLoading(true);
         setCurrentUser(res);
         closeAllPopups();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(()=>{
+        setIsLoading(false);
+      })
   }
   function handleUpdateAvatar(data) {
+    setIsLoading(true);
     api
       .redImgProfile(data)
       .then((res) => {
@@ -136,17 +140,23 @@ function App() {
         setCurrentUser(res);
         closeAllPopups();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(()=>{
+        setIsLoading(false);
+      })
   }
   function handleAddPlaceSubmit(data) {
+    setIsLoading(true);
     api
       .addNewCard(data)
       .then((res) => {
-        setIsLoading(true);
         setCards([res, ...cards]);
         closeAllPopups();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(()=>{
+        setIsLoading(false);
+      })
   }
   function signOut() {
     localStorage.removeItem("token");
