@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
-import {useForm} from '../hooks/useForm'
+import { useFormAndValidation } from "../hooks/useValidation";
 function Register(props) {
-  const { values, handleChange} = useForm({});
+  const {values, handleChange, errors, isValid, resetForm} = useFormAndValidation()
+  console.log(errors)
   const handleSubmit = (e) => {
     e.preventDefault();
     props.handleRegistration(values.email, values.password);
+    resetForm()
   };
   return (
     <div className="popup popup_type_login popup_opened">
@@ -28,7 +30,7 @@ function Register(props) {
             maxLength="40"
             required
           />
-          <span className="email-input-error popup__item-error"></span>
+          <span className="email-input-error popup__item-error">{errors.email}</span>
           <input
             id="password-input"
             type="password"
@@ -40,10 +42,11 @@ function Register(props) {
             minLength="2"
             required
           />
-          <span className="password-input-error popup__item-error"></span>
+          <span className="password-input-error popup__item-error">{errors.password}</span>
           <button
             type="submit"
             className="popup__button popup__button_type_login"
+            disabled={isValid?false:true}
           >
             Зарегистрироваться
           </button>
